@@ -8,7 +8,7 @@
     :root {
       --bg: #0b0b0c;
       --text: #f5f5f5;
-      --accent: #e63946;
+      --accent: #fff; /* Weiß für Button/Glow */
       --border: #444;
       --radius: 12px;
       --gap: 28px;
@@ -35,7 +35,7 @@
       text-align: center;
     }
 
-    /* Neon-Glow + Atem-Effekt für SOMNOWICZ */
+    /* Weißer Neon-Glow + Atem-Effekt für SOMNOWICZ */
     .intro-name {
       font-size: clamp(2rem, 8vw, 6rem);
       letter-spacing: 0.15em;
@@ -43,21 +43,21 @@
       text-transform: uppercase;
       color: #fff;
       text-shadow:
-        0 0 5px #e63946,
-        0 0 10px #e63946,
-        0 0 20px #e63946,
-        0 0 40px #ff4d6d;
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #fff;
       animation: breathe 6s ease-in-out infinite;
     }
 
     @keyframes breathe {
-      0%, 100% { text-shadow: 0 0 10px #ff4d6d, 0 0 20px #e63946, 0 0 30px #e63946, 0 0 50px #ff4d6d; }
-      50% { text-shadow: 0 0 25px #ff4d6d, 0 0 35px #e63946, 0 0 50px #e63946, 0 0 70px #ff4d6d; }
+      0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff; }
+      50% { text-shadow: 0 0 25px #fff, 0 0 35px #fff, 0 0 50px #fff, 0 0 70px #fff; }
     }
 
     /* Intro-Text */
     .intro-text {
-      margin-top: 1rem; /* näher an SOMNOWICZ */
+      margin-top: 1rem;
       max-width: 600px;
       font-size: 1.1rem;
       line-height: 1.5;
@@ -88,7 +88,7 @@
       border: none;
       border-radius: 8px;
       background: var(--accent);
-      color: #fff;
+      color: #0b0b0c;
       cursor: pointer;
       opacity: 0;
       animation: fadeIn 2s ease forwards;
