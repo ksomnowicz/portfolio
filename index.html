@@ -1,230 +1,205 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Krystian Somnowicz – Maler</title>
-  <meta name="description" content="Offizielle Portfolio-Seite der/des Maler ›Krystian Somnowicz‹ – Werke, Ausstellungen, Vita & Kontakt." />
-
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="Krystian Somnowicz" />
-  <meta property="og:description" content="Werke, Ausstellungen, Vita & Kontakt." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="images/cover.jpg" />
-  <meta property="og:url" content="https://deinusername.github.io/" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOMNOWICZ – Malerei</title>
   <style>
     :root {
       --bg: #0b0b0c;
-      --bg-elev: #141417;
-      --text: #e8e8ec;
-      --muted: #b7b7c0;
-      --accent: #7bd3ff; /* Akzentfarbe – frei anpassbar */
-      --border: #2a2a31;
-      --radius: 16px;
-      --gap: 18px;
-    }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#fcfcfe; --bg-elev:#ffffff; --text:#101014; --muted:#4e4e58; --border:#e7e7ef; }
+      --text: #f5f5f5;
+      --accent: #e63946;
+      --border: #444;
+      --radius: 12px;
+      --gap: 28px;
     }
 
-    * { box-sizing: border-box; }
-    html, body {
-  background: linear-gradient(135deg, #1a1a2e, #0b0b0c),
-              url("images/noise-texture.png");
-  background-blend-mode: overlay;
-  background-size: cover;
-}
-    a { color: inherit; text-decoration-color: var(--accent); }
-    img { max-width: 100%; height: auto; display: block; }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: linear-gradient(135deg, #1a1a2e, #0b0b0c);
+      color: var(--text);
+    }
 
-    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    /* --- INTRO SCREEN --- */
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      background: #0b0b0c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+    }
 
-    /* Header */
-    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: color-mix(in oklab, var(--bg) 86%, transparent); border-bottom: 1px solid var(--border); }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
-    .brand { font-weight: 700; letter-spacing: 0.4px; }
-    .brand small { font-weight: 500; color: var(--muted); }
-    nav ul { list-style: none; display: flex; gap: 14px; margin: 0; padding: 0; }
-    nav a { text-decoration: none; padding: 8px 12px; border-radius: 999px; border: 1px solid transparent; }
-    nav a:hover { border-color: var(--border); }
+    .intro-name {
+      font-size: clamp(2rem, 8vw, 6rem);
+      letter-spacing: 0.3em;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: slideIn 2s ease forwards;
+    }
 
-    /* Hero */
-    .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--gap); align-items: center; padding: 44px 0 28px; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.08; margin: 0 0 10px; }
-    .hero p { color: var(--muted); margin: 0 0 18px; }
-    .cta { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn { appearance: none; border: 1px solid var(--border); background: var(--bg-elev); color: var(--text); padding: 10px 14px; border-radius: 999px; cursor: pointer; text-decoration: none; }
-    .btn--accent { border-color: color-mix(in oklab, var(--accent), var(--border)); background: color-mix(in oklab, var(--accent) 16%, var(--bg-elev)); }
+    .intro-text {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 2s;
+    }
 
-    .card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .intro-btn {
+      margin-top: 2rem;
+      padding: 12px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 3.5s;
+    }
 
-    /* Sections */
-    section { padding: 26px 0; }
-    section h2 { font-size: clamp(22px, 3vw, 30px); margin: 0 0 12px; }
-    .muted { color: var(--muted); }
+    @keyframes slideIn {
+      0% { transform: translateX(-100%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
 
-    /* Gallery */
-    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); }
-    .work { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-elev); }
-    .work figure { margin: 0; display: grid; }
-    .work figcaption { padding: 12px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); }
-    .work img { aspect-ratio: 4/3; object-fit: cover; }
-    .work a { display: block; }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
 
-    /* About */
-    .about { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--gap); align-items: start; }
-    .about .portrait { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); max-height: 520px; }
+    /* --- HAUPTSEITE --- */
+    header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
 
-    /* Exhibitions */
-    .timeline { display: grid; gap: 12px; }
-    .timeline .item { padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elev); }
-    .timeline .year { font-weight: 700; margin-right: 8px; }
+    header nav a {
+      margin: 0 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
 
-    /* Contact */
-    .contact-card { display: grid; gap: 12px; padding: 16px; }
-    .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-    .contact-list a { text-decoration: none; }
+    section {
+      padding: 60px 20px;
+      max-width: 960px;
+      margin: auto;
+    }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); padding: 20px 0 60px; color: var(--muted); font-size: 14px; }
+    .hero, .about {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+    }
 
-    /* Lightbox */
-    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; padding: 20px; }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 92vw; max-height: 86vh; border-radius: 12px; }
-    .lightbox .close { position: absolute; top: 14px; right: 14px; font-size: 26px; line-height: 1; background: transparent; color: #fff; border: none; cursor: pointer; }
+    .text-box {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(6px);
+    }
 
-    /* Small screens */
-    @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; }
-      .about { grid-template-columns: 1fr; }
-      header .nav { flex-wrap: wrap; gap: 8px; }
-      nav ul { flex-wrap: wrap; }
+    .card img {
+      max-width: 100%;
+      border-radius: var(--radius);
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    .gallery {
+      display: grid;
+      gap: var(--gap);
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: var(--radius);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">Krystian Somnowicz <small>• Maler</small></div>
-      <nav aria-label="Hauptnavigation">
-        <ul>
-          <li><a href="#werke">Werke</a></li>
-          <li><a href="#vita">Vita</a></li>
-          <li><a href="#ausstellungen">Ausstellungen</a></li>
-          <li><a class="btn btn--accent" href="#kontakt">Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero" id="start">
-      <div>
-        <h1>Es packt mich. Er fühlt sich an wie ein kaum noch warmer, nackter Brustkorb der sich einer Zwergstrauchtundra anbietet.<br><span class="muted"></span></h1>
-        <div class="cta">
-          <a class="btn btn--accent" href="#werke">Galerie ansehen</a>
-          <a class="btn" href="#kontakt">Anfrage senden</a>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/hero.jpg" alt="Großansicht eines Gemäldes" loading="lazy" />
-      </div>
-    </section>
-
-    <!-- Werke / Galerie -->
-    <section id="werke">
-      <h2>Werke</h2>
-      <p class="muted">Wähle 6–12 Schlüsselarbeiten.</p>
-      <div class="gallery" id="gallery">
-        <article class="work">
-          <figure>
-            <a href="images/werke/werk-01.jpg" data-title="Titel 1 (120×80 cm, Öl, 2025)">
-              <img src="images/werke/werk-01.jpg" alt="Titel 1 – Öl auf Leinwand" loading="lazy" />
-            </a>
-            <figcaption>Titel 1 · 120×80 cm · Öl · 2025</figcaption>
-          </figure>
-        </article>
-        <article class="work">
-          <figure>
-            <a href="images/werke/werk-02.jpg" data-title="Titel 2 (100×100 cm, Acryl, 2024)">
-              <img src="images/werke/werk-02.jpg" alt="Titel 2 – Acrylgemälde" loading="lazy" />
-            </a>
-            <figcaption>Titel 2 · 100×100 cm · Acryl · 2024</figcaption>
-          </figure>
-        </article>
-      </div>
-    </section>
-
-    <!-- Vita / About -->
-    <section id="vita" class="about">
-      <div class="portrait">
-        <img src="images/portrait.jpg" alt="Portrait" loading="lazy" />
-      </div>
-      <div>
-        <h2>Vita</h2>
-        <p>Kurze Biografie. Ausbildung, Einflüsse, Orte.</p>
-        <ul>
-          <li><strong>Geboren:</strong> 1996, Pisz</li>
-          <li><strong>Ausbildung:</strong> FU Berlin, BA Theaterwissenschaft / Publizistik / Kommunikationswissenschaft</li>
-          <li><strong>Arbeitsort:</strong> Potsdam, Deutschland</li>
-          <li><strong>Techniken:</strong> Öl </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Ausstellungen -->
-    <section id="ausstellungen">
-      <h2>Ausstellungen (Auswahl)</h2>
-      <div class="timeline">
-        <div class="item"><span class="year">2025</span> Solo – „Titel Ausstellung“, Galerie Sonnengrau, Berlin</div>
-        <div class="item"><span class="year">2024</span> Gruppenausstellung – „Farbe & Form“, Kunsthalle Nord</div>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="kontakt" class="card">
-      <div class="contact-card">
-        <h2>Kontakt</h2>
-        <ul class="contact-list">
-          <li>E-Mail: <a href="mailto:ksomnowicz@gmail.com">deinname@mail.de</a></li>
-          <li>Instagram: <a href="https://instagram.com/deinhandle" target="_blank">@deinhandle</a></li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      © <span id="y"></span> Krystian Somnowicz • Alle Rechte vorbehalten
-    </div>
-  </footer>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <button class="close">×</button>
-    <img alt="Großansicht" />
+  <!-- INTRO SCREEN -->
+  <div class="intro-screen" id="intro">
+    <h1 class="intro-name">SOMNOWICZ</h1>
+    <p class="intro-text">es packt mich. Er fühlt...</p>
+    <button class="intro-btn" onclick="enterSite()">EINSTIEG</button>
   </div>
 
+  <!-- HAUPTSEITE -->
+  <main id="main-content" style="display:none;">
+    <header>
+      <nav>
+        <a href="#start">Start</a>
+        <a href="#about">Vita</a>
+        <a href="#werke">Werke</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="start">
+      <div class="text-box">
+        <h1>SOMNOWICZ<br><span class="muted">Zeitgenössische Malerei</span></h1>
+        <p>Kurzer Satz über Deine künstlerische Praxis.</p>
+      </div>
+      <div class="card">
+        <img src="images/hero.jpg" alt="Gemälde Beispiel">
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="card">
+        <img src="images/portrait.jpg" alt="Portrait">
+      </div>
+      <div class="text-box">
+        <h2>Vita</h2>
+        <p>Hier kannst du über deine Biografie, deine Ausbildung und deine künstlerische Entwicklung schreiben.</p>
+      </div>
+    </section>
+
+    <section id="werke">
+      <h2>Ausgewählte Werke</h2>
+      <div class="gallery">
+        <img src="images/werke/werk-01.jpg" alt="Werk 1">
+        <img src="images/werke/werk-02.jpg" alt="Werk 2">
+        <img src="images/werke/werk-03.jpg" alt="Werk 3">
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <h2>Kontakt</h2>
+      <p>Schreibe mir: <a href="mailto:deine-email@mail.com">deine-email@mail.com</a></p>
+      <p>Oder folge mir auf Instagram: <a href="#">@deinprofil</a></p>
+    </section>
+
+    <footer>
+      &copy; 2025 SOMNOWICZ – Alle Rechte vorbehalten
+    </footer>
+  </main>
+
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    const lb = document.getElementById('lightbox');
-    const lbImg = lb.querySelector('img');
-    const close = () => lb.classList.remove('open');
-    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
-    lb.querySelector('.close').addEventListener('click', close);
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-
-    document.getElementById('gallery')?.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
-      e.preventDefault();
-      lbImg.src = a.getAttribute('href');
-      lb.classList.add('open');
-    });
+    function enterSite() {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+    }
   </script>
 </body>
 </html>
