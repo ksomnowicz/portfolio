@@ -66,8 +66,27 @@
       margin-top: 1rem;
       font-size: 1.2rem;
       opacity: 0;
-      animation: fadeIn 2s ease forwards;
+      transform: translateY(20px);
+      animation: textRise 3s ease forwards;
       animation-delay: 2s;
+    }
+
+    @keyframes textRise {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: brightness(0.3);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translateY(10px);
+        filter: brightness(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: brightness(1);
+      }
     }
 
     .intro-btn {
@@ -81,7 +100,7 @@
       cursor: pointer;
       opacity: 0;
       animation: fadeIn 2s ease forwards;
-      animation-delay: 3.5s;
+      animation-delay: 4.5s;
     }
 
     @keyframes fadeIn {
