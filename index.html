@@ -8,7 +8,6 @@
     :root {
       --bg: #0b0b0c;
       --text: #f5f5f5;
-      --accent: #fff; /* Weiß für Button/Glow */
       --border: #444;
       --radius: 12px;
       --gap: 28px;
@@ -26,7 +25,6 @@
       position: fixed;
       inset: 0;
       background: #0b0b0c;
-      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -35,24 +33,29 @@
       text-align: center;
     }
 
-    /* Weißer Neon-Glow + Atem-Effekt für SOMNOWICZ */
+    /* SOMNOWICZ Hover-Neon */
     .intro-name {
       font-size: clamp(2rem, 8vw, 6rem);
       letter-spacing: 0.15em;
       font-weight: 700;
       text-transform: uppercase;
+      color: #555; /* dunkelgrau, sichtbar aber zurückhaltend */
+      display: flex;
+      gap: 0.2em;
+    }
+
+    .intro-name span {
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .intro-name span:hover {
       color: #fff;
       text-shadow:
         0 0 5px #fff,
         0 0 10px #fff,
         0 0 20px #fff,
         0 0 40px #fff;
-      animation: breathe 6s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff; }
-      50% { text-shadow: 0 0 25px #fff, 0 0 35px #fff, 0 0 50px #fff, 0 0 70px #fff; }
     }
 
     /* Intro-Text */
@@ -62,22 +65,13 @@
       font-size: 1.1rem;
       line-height: 1.5;
       opacity: 0;
-      transform: translateY(15px);
-      animation: textRise 4s ease forwards;
-      animation-delay: 1.5s;
+      animation: fadeInText 2s ease forwards;
+      animation-delay: 1.2s;
     }
 
-    @keyframes textRise {
-      0% {
-        opacity: 0;
-        transform: translateY(15px);
-        filter: brightness(0.3);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-        filter: brightness(1);
-      }
+    @keyframes fadeInText {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     /* Button */
@@ -87,15 +81,15 @@
       font-size: 1rem;
       border: none;
       border-radius: 8px;
-      background: var(--accent);
+      background: #fff;
       color: #0b0b0c;
       cursor: pointer;
       opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 5s;
+      animation: fadeInBtn 2s ease forwards;
+      animation-delay: 3s;
     }
 
-    @keyframes fadeIn {
+    @keyframes fadeInBtn {
       0% { opacity: 0; }
       100% { opacity: 1; }
     }
@@ -164,9 +158,11 @@
 <body>
   <!-- INTRO SCREEN -->
   <div class="intro-screen" id="intro">
-    <h1 class="intro-name">SOMNOWICZ</h1>
+    <h1 class="intro-name">
+      <span>S</span><span>O</span><span>M</span><span>N</span><span>O</span><span>W</span><span>I</span><span>C</span><span>Z</span>
+    </h1>
     <p class="intro-text">
-      Es packt mich. Es fühlt sich an wie ein kaum noch warmer, nackter Brustkorb 
+      Es packt mich. Er fühlt sich an wie ein kaum noch warmer, nackter Brustkorb 
       der sich einer Zwergstrauchtundra anbietet.
     </p>
     <button class="intro-btn" onclick="enterSite()">EINSTIEG</button>
