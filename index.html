@@ -33,29 +33,51 @@
       text-align: center;
     }
 
-    /* SOMNOWICZ Hover-Neon */
+    /* SOMNOWICZ Neon */
     .intro-name {
       font-size: clamp(2rem, 8vw, 6rem);
       letter-spacing: 0.15em;
       font-weight: 700;
       text-transform: uppercase;
-      color: #555; /* dunkelgrau, sichtbar aber zurückhaltend */
       display: flex;
       gap: 0.2em;
     }
 
     .intro-name span {
+      color: #000; /* unsichtbar */
+      opacity: 0.1;
       transition: all 0.3s ease;
-      cursor: default;
     }
 
+    /* Hover-Effekt */
     .intro-name span:hover {
       color: #fff;
+      opacity: 1;
       text-shadow:
         0 0 5px #fff,
         0 0 10px #fff,
         0 0 20px #fff,
         0 0 40px #fff;
+    }
+
+    /* Automatische Animation */
+    .intro-name span.animate {
+      color: #fff;
+      opacity: 1;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #fff;
+      animation: flicker 2s linear;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      20% { opacity: 0.6; }
+      30% { opacity: 1; }
+      100% { opacity: 1; }
     }
 
     /* Intro-Text */
@@ -66,12 +88,12 @@
       line-height: 1.5;
       opacity: 0;
       animation: fadeInText 2s ease forwards;
-      animation-delay: 1.2s;
+      animation-delay: 2.5s;
     }
 
     @keyframes fadeInText {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     /* Button */
@@ -86,7 +108,7 @@
       cursor: pointer;
       opacity: 0;
       animation: fadeInBtn 2s ease forwards;
-      animation-delay: 3s;
+      animation-delay: 4s;
     }
 
     @keyframes fadeInBtn {
@@ -224,6 +246,16 @@
       document.getElementById("intro").style.display = "none";
       document.getElementById("main-content").style.display = "block";
     }
+
+    // Neon-Effekt: Buchstaben nacheinander "zünden"
+    window.addEventListener("DOMContentLoaded", () => {
+      const letters = document.querySelectorAll(".intro-name span");
+      letters.forEach((letter, i) => {
+        setTimeout(() => {
+          letter.classList.add("animate");
+        }, i * 300); // 300ms Abstand pro Buchstabe
+      });
+    });
   </script>
 </body>
 </html>
